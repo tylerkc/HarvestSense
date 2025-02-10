@@ -1,9 +1,22 @@
 # Harvest Sense: AI-Powered Crop Yield and Soil Quality Prediction
 
+
 ## 📌 Project Overview
 Harvest Sense is an advanced AI-driven solution for **predicting crop yield and soil quality** using deep learning (LSTM) and machine learning (Random Forest) models. The project leverages **historical environmental data, soil conditions, and agricultural trends** to generate accurate, data-driven insights for precision farming and sustainable agriculture.
 
 This repository contains the complete workflow for **data preprocessing, feature engineering, model training, evaluation, and visualization** of predictions. The final output is exported to **Tableau for interactive data exploration**.
+
+
+## **AI Engineers Behind Harvest Sense**  
+
+This project was developed by a team of skilled AI engineers at the University of San Diego, California; dedicated to advancing precision agriculture through machine learning and deep learning techniques. Their expertise in AI, data science, and predictive analytics contributed to the successful implementation of this intelligent crop yield and soil quality prediction system.  
+
+- **Arifa Kokab** - Team Lead
+- **Muhammad Haris** 
+- **Tyler Clinscales** 
+
+Their collaborative efforts ensured the development of an accurate, scalable, and efficient solution designed to support farmers with data-driven insights for better agricultural decision-making.  
+
 
 ## 📂 Dataset Description
 The dataset used in this project spans **10 years (2014-2023)** and includes daily agricultural observations such as:
