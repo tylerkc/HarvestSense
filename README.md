@@ -2,59 +2,42 @@
 
 ## Overview
 
-Harvest Sense is an IoT-based precision agriculture platform designed to forecast crop yield and assess soil quality using advanced machine learning techniques. The project leverages a synthetic dataset spanning 2014 to 2023 to capture daily agricultural parameters across ten major crops and five distinct soil types. Data is collected from an extensive network of soil, crop, and environmental sensors, processed through rigorous preprocessing and feature engineering, and analyzed using a Long Short-Term Memory (LSTM) network for crop yield forecasting and a Random Forest regressor for soil quality prediction. The outputs are integrated and presented through an intuitive Tableau dashboard, providing actionable insights that enable farmers to optimize their practices.
+Harvest Sense is an IoT-based precision agriculture platform designed to forecast crop yield and assess soil quality using advanced machine learning techniques. The project leverages a synthetic dataset spanning 2014 to 2023, which captures daily agricultural parameters across ten major crops and five distinct soil types. Data is collected from an extensive network of soil, crop, and environmental sensors, then processed and analyzed using a Long Short-Term Memory (LSTM) network for crop yield forecasting and a Random Forest regressor for soil quality prediction. The results of these models are integrated into an intuitive Tableau dashboard, enabling farmers to quickly identify areas requiring attention and optimize their practices. This repository includes all source code, data files, and documentation for the Harvest Sense project.
 
 ## Repository Contents
 
-- **Harvest_Sense_Notebook.ipynb**  
-  The main Jupyter Notebook containing all the code used for data preprocessing, exploratory data analysis, model development (LSTM and Random Forest), model evaluation, and the integration of forecast outputs.
+The repository contains the main Jupyter Notebook, which includes all code for data preprocessing, exploratory data analysis, model development, evaluation, and forecast integration. The file **Harvest_Sense_Notebook.ipynb** holds the complete project code. In addition, the CSV file **harvestsense_combined_forecasts_original_units.csv** consolidates historical and forecasted values for crop yield and soil quality (converted back to their original units), and **Harvest Sense Tableau Dashboard.pdf** provides a PDF version of the final Tableau dashboard that has been designed for ease of interpretation.
 
-- **harvestsense_combined_forecasts_original_units.csv**  
-  A CSV file that consolidates historical actual values and six-month forecasted values for both crop yield and soil quality in their original units. This file is intended for import into Tableau for dashboard creation and further analysis.
+## Dataset
 
-- **Harvest Sense Tableau Dashboard.pdf**  
-  A PDF version of the final Tableau dashboard. The dashboard is designed with a clear color palette and industrial thresholds to help farmers quickly identify areas of concern regarding crop yield and soil quality.
+The project utilizes a synthetic dataset that provides a detailed representation of crop yield and environmental factors influencing agricultural productivity over a decade (2014-2023). This dataset contains daily observations and includes data on ten major crops such as Wheat, Corn, Rice, and Sugarcane, grown across five distinct soil types. It captures key variables including soil pH, nutrient levels (nitrogen, phosphorus, and potassium), temperature, humidity, wind speed, crop yield (expressed in metric tons per hectare), and a soil quality index that summarizes soil fertility. The dataset was generated using domain-specific synthetic modeling techniques that incorporate real-world agricultural principles, resulting in data that exhibit both short-term fluctuations and long-term trends. The dataset is available on Kaggle at:  
+www.kaggle.com/datasets/madhankumar789/crop-yield-and-environmental-factors-2014-2023
 
-## System Design and Methodology
+## IoT System Design and Data Integration
 
-Harvest Sense integrates an IoT-enabled sensor network with sophisticated machine learning methods to drive precision agriculture. The IoT architecture consists of a sensor network that collects data on soil pH, nutrient levels (N, P, K), crop types, environmental factors (temperature, humidity, wind speed), and corresponding performance metrics such as crop yield and a soil quality index. This data is preprocessed—dates are converted, categorical features are one-hot encoded, and numerical features are standardized—before being used to train the machine learning models.
+Harvest Sense is built upon a scalable and modular IoT architecture that integrates sensor networks, edge computing, cloud processing, and real-time visualization. Soil, crop, and environmental sensors capture various parameters and transmit this data via LoRaWAN, Wi-Fi, or LTE using MQTT for efficient communication. Edge computing units preprocess the data by detecting anomalies, cleaning noise, and performing initial aggregation. The refined data is then transmitted to the cloud, where it is normalized and stored for further analysis. This design ensures that the system is highly scalable, allowing for the addition of new sensors and computational resources without major changes to the overall architecture.
 
-For crop yield forecasting, an LSTM network is employed because of its ability to capture long-term dependencies in sequential data. The model is trained on a sliding window of 30 days of sensor data, enabling it to learn the temporal dynamics that influence yield. In parallel, a Random Forest model is developed to predict soil quality. This ensemble method effectively handles nonlinear relationships and provides interpretable insights via feature importance analysis. The models are evaluated using metrics such as Mean Squared Error and Mean Absolute Error, and the results from these evaluations inform further refinements.
+## Methodology and Model Development
 
-The final outputs—both the actual historical values and the six-month forecasts—are merged into a unified dataset. This dataset is then inverse-transformed to restore the original measurement units and serves as the foundation for the Tableau dashboard, which provides farmers with a simple and interactive interface to monitor crop performance and soil health.
+The methodological framework of Harvest Sense integrates deep learning and ensemble methods to extract actionable insights from the collected data. The LSTM network, employed for crop yield forecasting, is designed to capture long-term dependencies in sequential data. Using a sliding window approach of 30 days, the model learns from features such as soil pH, temperature, humidity, wind speed, and nutrient levels to predict future crop yield. The network comprises two stacked LSTM layers with dropout mechanisms to prevent overfitting and is trained using the Adam optimizer with early stopping based on validation loss. Evaluation metrics from the LSTM models, including Mean Squared Error and Mean Absolute Error, were used to ensure robust performance across crop types.
+
+For soil quality prediction, a Random Forest regressor was chosen due to its ability to model complex, nonlinear interactions among features and to provide insights into feature importance. The model was tuned using GridSearchCV to optimize key hyperparameters such as the number of estimators and maximum depth. The resulting predictions demonstrated very low error values on test data, and the model’s feature importance scores highlighted the influence of soil pH and nutrient levels. Both crop yield and soil quality forecasts were generated for a six-month horizon and were subsequently combined with historical data to create a unified dataset. This comprehensive dataset forms the foundation for the final interactive Tableau dashboard.
 
 ## Tableau Dashboard
 
-The final Tableau dashboard is designed with simplicity and clarity, featuring four primary bar charts. The upper charts compare current crop yield with forecasted crop yield, while the lower charts provide a similar comparison for soil quality. The dashboard uses an easy-to-understand color palette and pre-defined industrial thresholds, enabling farmers to quickly identify fields that require intervention. Interactive filters allow users to drill down by crop type or time period, further enhancing the usability and practical impact of the system.
+The final Tableau dashboard for Harvest Sense is designed with simplicity and clarity, featuring four core bar charts that provide a concise overview of both current and forecasted conditions. Two of the charts display current and predicted crop yields for each crop type, while the other two show the latest and six-month forecasted soil quality values. An intuitive color palette and well-defined industrial thresholds enable farmers to quickly assess which fields are performing well and which require intervention. Interactive filters allow users to refine the view by crop type or time period, ensuring that the dashboard is accessible and actionable for users with varying levels of technical expertise.
 
 ## Authors and Contributors
 
-This project was developed by Team 2 at the University of San Diego. The team members and their roles are as follows:
-
-- **Arifa Kokab (Team Lead)** – AI Engineer responsible for project coordination and technical leadership.
-- **Muhammad Haris** – AI Engineer with a focus on data preprocessing, model development, and analysis.
-- **Tyler Clinscales** – AI Engineer contributing to model evaluation, visualization, and forecast integration.
+This project was developed by Team 2 at the University of San Diego. The team comprises AI Engineers:
+- **Arifa Kokab (Team Lead)**
+- **Muhammad Haris**
+- **Tyler Clinscales**
 
 ## How to Run
 
-1. **Clone the Repository:**  
-   Open your terminal and run:  
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. **Open the Notebook:**  
-   Launch Jupyter Notebook or JupyterLab and open `Harvest_Sense_Notebook.ipynb`. Follow the instructions in the notebook to run the code sequentially.
-
-3. **Review the Outputs:**  
-   The final CSV file, `harvestsense_combined_forecasts_original_units.csv`, will be generated along with the Tableau dashboard PDF, `Harvest Sense Tableau Dashboard.pdf`.
-
-4. **Dashboard Integration:**  
-   Import the CSV file into Tableau to explore and customize the dashboard as needed.
+To run this project, clone the repository and open the `Harvest_Sense_Notebook.ipynb` in Jupyter Notebook or JupyterLab. The notebook includes detailed instructions and code for preprocessing, model training, evaluation, and integration of forecast data. After executing the notebook, the CSV file containing the combined forecasts will be generated, and you can open the provided Tableau dashboard PDF to view the final visualization.
 
 ## Requirements
 
-- Python 3.x
-- Pandas, NumPy, Seaborn, Matplotlib, and Scikit-learn
-- TensorFlow and Keras
-- Additional libraries as specified in the notebook (refer to the notebook for full dependency details)
+The project requires Python 3.x along with libraries such as Pandas, NumPy, Seaborn, Matplotlib, Scikit-learn, TensorFlow, and Keras. Detailed dependency information is provided within the notebook.
