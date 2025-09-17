@@ -1,4 +1,4 @@
-# HarvestSense-AAI-530-Team2
+# Harvest Sense
 
 ## Overview
 
